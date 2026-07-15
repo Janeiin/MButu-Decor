@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ivory: #f4efe7;
+  --charcoal: #2b2723;
+  --taupe: #8c8173;
+  --clay: #9b7b4f;
+  --espresso: #26201b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-body antialiased;
+    overflow-x: hidden;
+    font-weight: 350;
+  }
+
+  ::selection {
+    background: rgba(155, 123, 79, 0.22);
+    color: #2b2723;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 1.04;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ede6da;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cdbfa8;
+    border-radius: 999px;
+    border: 2px solid #ede6da;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b7a68b;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--clay);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Generous editorial gutters */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 sm:px-10 lg:px-16;
+  }
+
+  /* Small uppercase label / eyebrow */
+  .eyebrow {
+    @apply font-body text-[11px] font-medium uppercase tracking-label text-taupe;
+  }
+
+  .eyebrow-light {
+    @apply font-body text-[11px] font-medium uppercase tracking-label text-clay-gold/80;
+  }
+
+  /* Italic serif accent, warm bronze */
+  .accent {
+    @apply font-display italic text-clay;
+  }
+
+  /* Frosted ivory navigation surface */
+  .glass {
+    background: rgba(244, 239, 231, 0.72);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border-bottom: 1px solid rgba(217, 207, 191, 0.7);
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(155, 123, 79, 0.4),
+      transparent
+    );
+  }
+
+  /* Primary premium button (dark on light) */
+  .btn-primary {
+    @apply inline-flex items-center gap-3 rounded-full bg-charcoal px-8 py-4 font-body text-[12px] font-medium uppercase tracking-wide2 text-ivory transition-colors duration-500 ease-lux hover:bg-espresso;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply inline-flex items-center gap-3 rounded-full border border-charcoal/25 px-8 py-4 font-body text-[12px] font-medium uppercase tracking-wide2 text-charcoal transition-all duration-500 ease-lux hover:border-clay hover:text-clay;
+  }
+
+  /* Light button used on espresso sections */
+  .btn-light {
+    @apply inline-flex items-center gap-3 rounded-full bg-ivory px-8 py-4 font-body text-[12px] font-medium uppercase tracking-wide2 text-charcoal transition-colors duration-500 ease-lux hover:bg-clay-gold;
+  }
+}
+
+@layer utilities {
+  /* Very fine paper grain, warms the flat ivory */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
