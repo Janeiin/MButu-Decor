@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0908;
+  --charcoal: #1a1613;
+  --gold: #c6a46a;
+  --gold-bright: #d8bc86;
+  --ivory: #e9e1cf;
+}
+
+@layer base {
+  * {
+    @apply border-charcoal-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ink text-ivory font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(198, 164, 106, 0.28);
+    color: #f4ecda;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0908;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #33291b;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a3b28;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 sm:px-10 lg:px-16;
+  }
+
+  /* Warm ivory to gold gradient text for accents */
+  .text-lux {
+    background: linear-gradient(180deg, #f2ead6 0%, #d8bc86 55%, #a17f4d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    @apply font-body text-[11px] uppercase tracking-label text-gold-dim;
+  }
+
+  /* Frosted glass navigation surface */
+  .glass {
+    background: rgba(12, 10, 9, 0.55);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    border-bottom: 1px solid rgba(198, 164, 106, 0.1);
+  }
+
+  /* Hairline gold divider */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(198, 164, 106, 0.5),
+      transparent
+    );
+  }
+}
+
+@layer utilities {
+  /* Film grain overlay, sits above everything, ignores pointer */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 40px -12px rgba(198, 164, 106, 0.45);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
