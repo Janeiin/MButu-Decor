@@ -5,60 +5,62 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: {
-          DEFAULT: '#0A0908', // near black
-          900: '#0A0908',
-          800: '#100E0C',
-          700: '#15120F',
-        },
-        charcoal: {
-          DEFAULT: '#1A1613',
-          light: '#221D18',
-          line: '#2A241E',
-        },
-        bronze: {
-          DEFAULT: '#6E5A3E',
-          deep: '#4A3B28',
-          dark: '#33291B',
-        },
-        gold: {
-          DEFAULT: '#C6A46A', // brand accent
-          bright: '#D8BC86', // brushed highlight
-          dim: '#8C7449',
-        },
+        // Light editorial base
         ivory: {
-          DEFAULT: '#E9E1CF', // warm ivory typography
-          dim: '#A79E8C',
-          faint: '#6E6656',
+          DEFAULT: '#F4EFE7', // warm ivory page background
+          deep: '#EDE6DA', // slightly deeper panels
         },
+        sand: {
+          DEFAULT: '#E7DECF', // alternate section / card ground
+          dark: '#DCD1BE',
+        },
+        line: '#D9CFBF', // hairlines on light
+        // Text
+        charcoal: {
+          DEFAULT: '#2B2723', // primary text
+          soft: '#4A443C',
+        },
+        taupe: {
+          DEFAULT: '#8C8173', // muted text, labels
+          light: '#A99C88',
+          dark: '#6F6558',
+        },
+        // Dark editorial sections
+        espresso: {
+          DEFAULT: '#26201B',
+          light: '#322A23',
+          line: '#3E362D',
+        },
+        // Restrained metallic accent
+        clay: {
+          DEFAULT: '#9B7B4F', // bronze accent on light
+          gold: '#C6A46A', // warmer accent on dark
+        },
+        ivorytext: '#EFE7D8', // ivory text used on espresso
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Georgia', 'serif'],
+        display: ['var(--font-display)', 'Cormorant Garamond', 'Georgia', 'serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
-        widest: '0.28em',
-        label: '0.34em',
+        label: '0.3em',
+        wide2: '0.18em',
       },
       maxWidth: {
-        shell: '1440px',
+        shell: '1360px',
+        prose2: '58ch',
       },
       transitionTimingFunction: {
         lux: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       keyframes: {
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        },
-        floatUp: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       animation: {
-        shimmer: 'shimmer 6s linear infinite',
-        floatUp: 'floatUp 7s ease-in-out infinite',
+        marquee: 'marquee 34s linear infinite',
       },
     },
   },

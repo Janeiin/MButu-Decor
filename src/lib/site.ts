@@ -1,24 +1,23 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  M'BUTU — SINGLE SOURCE OF TRUTH
+ *  M'BUTU COLLECTION — SINGLE SOURCE OF TRUTH
  * ─────────────────────────────────────────────────────────────
- *  Every piece of copy, contact detail and image URL lives here.
- *  To rebrand or restock the site you only ever edit this file.
+ *  All copy, contact details and image URLs live here. To restock
+ *  or rebrand the site you only ever edit this file.
  *
- *  IMAGES
- *  All photography is referenced through `media` below. The current
- *  values are royalty-free Unsplash URLs used as placeholders. To use
- *  your own art direction, drop files into /public/images and swap the
- *  URL, for example:  hero: '/images/your-photo.jpg'
- *  Sizes are already handled by next/image, so any resolution works.
+ *  IMAGES are referenced through `media` and each item's `image`.
+ *  Current values are royalty-free Unsplash placeholders. To use your
+ *  own art direction, drop files into /public/images and swap the URL,
+ *  for example:  hero: '/images/your-photo.jpg'
  * ─────────────────────────────────────────────────────────────
  */
 
 export const site = {
-  name: "M'Butu",
-  tagline: 'The Finest African Leather, Curated for Exceptional Interiors',
+  name: "M'Butu Collection",
+  wordmark: "M'Butu",
+  tagline: 'Rare African Luxury Hides',
   description:
-    "M'Butu is a trade-only house sourcing ethically raised zebra, springbok and premium African hides for luxury interiors, architects and five-star lodges.",
+    "M'Butu Collection sources ethically raised, CITES compliant Hartmann Zebra and rare African hides for exceptional interiors, bespoke furniture and luxury hospitality.",
   url: 'https://mbutu.example.com',
   locale: 'en',
 
@@ -27,6 +26,8 @@ export const site = {
     whatsapp: '+974 0000 0000',
     whatsappLink: 'https://wa.me/9740000000',
     location: 'Doha, Qatar',
+    sourced: 'Namibia',
+    serving: 'Europe, Australia and the GCC',
     hours: 'By appointment',
   },
 
@@ -37,163 +38,261 @@ export const site = {
   ],
 
   nav: [
-    { label: 'About', href: '#about' },
-    { label: 'Collection', href: '#products' },
-    { label: 'Atelier', href: '#why' },
+    { label: 'The House', href: '#story' },
+    { label: 'Why Hartmann', href: '#why' },
+    { label: 'Materials', href: '#materials' },
+    { label: 'Applications', href: '#applications' },
     { label: 'Gallery', href: '#gallery' },
-    { label: 'Process', href: '#process' },
     { label: 'Contact', href: '#contact' },
   ],
 } as const;
 
-/**
- * MEDIA MAP — swap any URL for a local file in /public/images.
- */
 export const media = {
-  about:
-    'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=80',
-  aboutDetail:
-    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80',
-  gallery: [
-    'https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=900&q=80',
-    'https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=900&q=80',
-  ],
+  hero:
+    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80',
+  story:
+    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80',
+  storyDetail:
+    'https://images.unsplash.com/photo-1551845041-63e8e76836ea?auto=format&fit=crop&w=1000&q=80',
+  whyFeature:
+    'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1400&q=80',
+  closing:
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80',
 } as const;
 
-export type Product = {
+/** Scannable brand values shown as an editorial marquee. */
+export const ethos = [
+  'Rare',
+  'Authentic',
+  'Ethically Sourced',
+  'One of One',
+  'Timeless Craftsmanship',
+];
+
+/** Scarcity lines, surfaced in several places across the page. */
+export const scarcity = [
+  'Every Hartmann hide is completely unique.',
+  'Only a limited number are legally released each year.',
+  'No two hides are ever alike.',
+  'Rare African luxury, ethically sourced.',
+];
+
+export const whyHartmann = [
+  {
+    k: 'rarity',
+    title: 'Among the rarest',
+    body: 'One of the rarest zebra hides available anywhere in the world.',
+  },
+  {
+    k: 'pattern',
+    title: 'A refined stripe',
+    body: 'Distinguished by a narrower, more delicate stripe than any other zebra.',
+  },
+  {
+    k: 'origin',
+    title: 'Native to Namibia',
+    body: 'Endemic to the mountains of Namibia, and found nowhere else on earth.',
+  },
+  {
+    k: 'cites',
+    title: 'CITES documented',
+    body: 'Every hide travels with official CITES documentation and full provenance.',
+  },
+  {
+    k: 'unique',
+    title: 'One of one',
+    body: 'No two patterns repeat. Each hide is a singular, unrepeatable piece.',
+  },
+];
+
+export type Material = {
   id: string;
   name: string;
-  origin: string;
+  latin: string;
   note: string;
   image: string;
 };
 
-export const products: Product[] = [
+export const materials: Material[] = [
   {
-    id: 'zebra',
-    name: 'Zebra Hides',
-    origin: "Hartmann's Mountain",
-    note: 'Each pattern singular, never repeated. The signature of the house.',
+    id: 'hartmann',
+    name: 'Hartmann Zebra',
+    latin: 'The signature',
+    note: 'The rarest of the zebras. A narrow, refined stripe and unmatched depth of tone.',
     image:
-      'https://images.unsplash.com/photo-1551845041-63e8e76836ea?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1551845041-63e8e76836ea?auto=format&fit=crop&w=1100&q=80',
   },
   {
-    id: 'cow',
-    name: 'Cow Hides',
-    origin: 'Free-range herds',
-    note: 'Full-grain character, supple hand, built for a lifetime of use.',
+    id: 'burchell',
+    name: 'Burchell Zebra',
+    latin: 'The classic',
+    note: 'Bold, broad striping with warm shadow bands. An assured, graphic presence.',
     image:
-      'https://images.unsplash.com/photo-1533560904424-a0c61dc306fc?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1100&q=80',
   },
   {
     id: 'springbok',
     name: 'Springbok',
-    origin: 'Karoo plains',
-    note: 'Fine, short-haired and light. A restrained, tonal elegance.',
+    latin: 'The delicate',
+    note: 'Fine, short-haired and light, in tonal bands of cinnamon, cream and umber.',
     image:
-      'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1100&q=80',
   },
   {
-    id: 'skins',
-    name: 'Leather Skins',
-    origin: 'Tannery-finished',
-    note: 'Vegetable-tanned surfaces in a palette of earth and shadow.',
+    id: 'blesbok',
+    name: 'Blesbok',
+    latin: 'The understated',
+    note: 'Rich mahogany with a pale blaze. Quietly distinctive and endlessly versatile.',
     image:
-      'https://images.unsplash.com/photo-1620726817608-d4c78f4e7a3a?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1590067596025-4b3a0f6a30cb?auto=format&fit=crop&w=1100&q=80',
   },
   {
-    id: 'custom',
-    name: 'Custom Sourcing',
-    origin: 'On commission',
-    note: 'A private brief, matched hide by hide to your specification.',
+    id: 'impala',
+    name: 'Impala',
+    latin: 'The elegant',
+    note: 'Sleek and tonal, a warm russet fading to ivory along the flank.',
     image:
-      'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1100&q=80',
+  },
+  {
+    id: 'waterbuck',
+    name: 'Waterbuck',
+    latin: 'The robust',
+    note: 'Coarse, characterful and dark, with a presence suited to grand rooms.',
+    image:
+      'https://images.unsplash.com/photo-1504006833117-8886a355efbf?auto=format&fit=crop&w=1100&q=80',
+  },
+  {
+    id: 'ostrich',
+    name: 'Ostrich Leather',
+    latin: 'The exotic',
+    note: 'The distinctive quill pattern, supple and rare, finished for interiors.',
+    image:
+      'https://images.unsplash.com/photo-1620726817608-d4c78f4e7a3a?auto=format&fit=crop&w=1100&q=80',
   },
 ];
 
-export const reasons = [
+/** Spaces the hides elevate. Copy only, arranged as an editorial list. */
+export const applications = [
+  'Luxury Homes',
+  'Boutique Hotels',
+  'Executive Offices',
+  'Restaurants',
+  'Villas',
+  'Penthouses',
+  'Yachts',
+  'Lodges',
+];
+
+export const applicationImages = [
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80',
+];
+
+export type GallerySet = {
+  title: string;
+  caption: string;
+  feature: string;
+  support: [string, string];
+};
+
+export const gallery: GallerySet[] = [
   {
-    stat: '100%',
-    label: 'Premium Quality',
-    body: 'Every hide graded by hand. Only the top tier reaches our clients.',
+    title: 'Living Spaces',
+    caption: 'A single hide anchors the room, warm underfoot and unmistakably rare.',
+    feature:
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80',
+    support: [
+      'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80',
+    ],
   },
   {
-    stat: 'Full',
-    label: 'Ethically Sourced',
-    body: 'Traceable, responsibly managed origins. Nothing else is accepted.',
+    title: 'Boutique Hotels',
+    caption: 'Statement pieces that give a lobby or suite its sense of place.',
+    feature:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80',
+    support: [
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80',
+    ],
   },
   {
-    stat: '40+',
-    label: 'Global Shipping',
-    body: 'Discreet worldwide delivery, fully documented and insured.',
+    title: 'Luxury Lodges',
+    caption: 'Materials drawn from the land, returned to it with intent.',
+    feature:
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1400&q=80',
+    support: [
+      'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80',
+    ],
   },
   {
-    stat: '5★',
-    label: 'Luxury Interiors',
-    body: 'Trusted by lodges, hoteliers and the studios that shape them.',
+    title: 'Designer Projects',
+    caption: 'Commissioned, matched and documented for the studios that specify us.',
+    feature:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80',
+    support: [
+      'https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80',
+    ],
   },
   {
-    stat: '1:1',
-    label: 'Unique Natural Patterns',
-    body: 'No two hides alike. Each carries its own quiet signature.',
-  },
-  {
-    stat: 'Trade',
-    label: 'Trade Only',
-    body: 'Reserved for designers, architects and specifiers. By introduction.',
+    title: 'Furniture & Styling',
+    caption: 'Upholstery, throws and detailing, cut from a single provenance.',
+    feature:
+      'https://images.unsplash.com/photo-1533560904424-a0c61dc306fc?auto=format&fit=crop&w=1400&q=80',
+    support: [
+      'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80',
+    ],
   },
 ];
 
-export const processSteps = [
+export const trust = [
+  'Ethically Sourced',
+  'CITES Compliant',
+  'International Shipping',
+  'Based in Qatar',
+  'Sourced in Namibia',
+  'Europe · Australia · GCC',
+];
+
+export const commercial = [
   {
-    n: '01',
-    title: 'Source',
-    body: 'We work only with responsibly managed origins across Southern Africa.',
+    title: 'Interior Designers',
+    body: 'Source statement pieces for residential and commercial projects.',
+    cta: 'Source a Rare Hide',
   },
   {
-    n: '02',
-    title: 'Select',
-    body: 'Hides are chosen by hand for pattern, scale and structural integrity.',
+    title: 'Hospitality',
+    body: 'For luxury hotels, lodges and boutique resorts.',
+    cta: 'Discuss Your Project',
   },
   {
-    n: '03',
-    title: 'Inspect',
-    body: 'Each piece is graded, measured and photographed before it is offered.',
-  },
-  {
-    n: '04',
-    title: 'Ship',
-    body: 'Climate-considered packing and fully insured, documented transit.',
-  },
-  {
-    n: '05',
-    title: 'Deliver',
-    body: 'Your selection arrives ready to install, with provenance in hand.',
+    title: 'Retail Partners',
+    body: 'Consignment partnerships and showroom opportunities.',
+    cta: 'Enquire About Availability',
   },
 ];
 
 export const testimonials = [
   {
     quote:
-      'M\u2019Butu understands restraint. What they sent was not a product, it was the character of the whole room.',
+      'What arrived was not a product. It was the character of the whole room.',
     name: 'Elise Marchand',
     role: 'Principal, Atelier Marchand',
   },
   {
     quote:
-      'The consistency across a forty-suite commission was flawless. Provenance documented, every hide singular.',
+      'Consistency across a forty-suite commission was flawless. Provenance documented, every hide singular.',
     name: 'Rashid Al-Fahim',
     role: 'Design Director, Desert Collection Hotels',
   },
   {
     quote:
-      'Quietly the best in the trade. They source what no one else can find, and they never overstate it.',
+      'They source what no one else can find, and they never overstate it. Quietly the best in the trade.',
     name: 'Johanna Krige',
     role: 'Interior Architect, Cape Studio',
   },

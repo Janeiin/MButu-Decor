@@ -3,21 +3,24 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { site } from '@/lib/site';
 
-// Self-hosted variable fonts (no external requests at build or runtime).
-// Fraunces carries the couture display voice; Jost is the quiet body face.
+// Self-hosted fonts (no external requests at build or runtime).
+// Cormorant Garamond is the editorial display serif; Manrope is the
+// clean, warm sans for body and interface text.
 const display = localFont({
   src: [
-    { path: '../fonts/Fraunces.woff2', style: 'normal' },
-    { path: '../fonts/Fraunces-Italic.woff2', style: 'italic' },
+    { path: '../fonts/Cormorant-300.woff2', weight: '300', style: 'normal' },
+    { path: '../fonts/Cormorant-400.woff2', weight: '400', style: 'normal' },
+    { path: '../fonts/Cormorant-400-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../fonts/Cormorant-500.woff2', weight: '500', style: 'normal' },
+    { path: '../fonts/Cormorant-500-Italic.woff2', weight: '500', style: 'italic' },
   ],
-  weight: '300 500',
   variable: '--font-display',
   display: 'swap',
 });
 
 const body = localFont({
-  src: [{ path: '../fonts/Jost.woff2', style: 'normal' }],
-  weight: '300 500',
+  src: [{ path: '../fonts/Manrope.woff2', style: 'normal' }],
+  weight: '200 700',
   variable: '--font-body',
   display: 'swap',
 });
@@ -56,8 +59,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0a0908',
-  colorScheme: 'dark',
+  themeColor: '#f4efe7',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({

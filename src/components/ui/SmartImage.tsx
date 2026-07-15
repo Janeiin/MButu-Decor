@@ -16,7 +16,7 @@ type Props = {
 
 /**
  * next/image wrapper. If a remote placeholder fails to load, the frame
- * gracefully falls back to a charcoal gradient so the layout never breaks.
+ * falls back to a warm sand gradient so the layout never breaks.
  */
 export default function SmartImage({
   src,
@@ -35,7 +35,7 @@ export default function SmartImage({
       <div
         aria-label={alt}
         role="img"
-        className={`h-full w-full bg-gradient-to-br from-charcoal-light via-charcoal to-ink ${className ?? ''}`}
+        className={`h-full w-full bg-gradient-to-br from-sand via-ivory-deep to-sand-dark ${className ?? ''}`}
       />
     );
   }

@@ -21,7 +21,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="relative overflow-hidden py-28 sm:py-40"
+      className="relative overflow-hidden bg-sand py-28 sm:py-40"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -30,50 +30,41 @@ export default function Testimonials() {
           <span className="eyebrow">Trusted By</span>
         </Reveal>
 
-        {/* Oversized quotation mark */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-4 top-20 select-none font-display text-[22rem] leading-none text-charcoal-light sm:left-10"
-        >
+        <span aria-hidden className="pointer-events-none absolute left-4 top-16 select-none font-display text-[20rem] leading-none text-sand-dark sm:left-10">
           &ldquo;
         </span>
 
-        <div className="relative mx-auto mt-10 min-h-[16rem] max-w-4xl">
+        <div className="relative mx-auto mt-8 min-h-[15rem] max-w-4xl">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -24 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="font-display text-3xl font-light italic leading-[1.25] text-ivory sm:text-4xl lg:text-[2.75rem]">
+              <p className="font-display text-3xl font-normal italic leading-[1.25] text-charcoal sm:text-4xl lg:text-[2.6rem]">
                 {t.quote}
               </p>
               <footer className="mt-10 flex items-center gap-4">
-                <span className="h-px w-10 bg-gold" />
+                <span className="h-px w-10 bg-clay" />
                 <div>
-                  <p className="font-body text-sm uppercase tracking-widest text-ivory">
-                    {t.name}
-                  </p>
-                  <p className="mt-1 font-body text-xs text-ivory-faint">{t.role}</p>
+                  <p className="font-body text-sm font-medium uppercase tracking-wide2 text-charcoal">{t.name}</p>
+                  <p className="mt-1 font-body text-xs text-taupe">{t.role}</p>
                 </div>
               </footer>
             </motion.blockquote>
           </AnimatePresence>
         </div>
 
-        <div className="mt-14 flex gap-3">
+        <div className="mt-12 flex gap-3">
           {testimonials.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setI(idx)}
               aria-label={`Show testimonial ${idx + 1}`}
               className="h-[3px] rounded-full transition-all duration-500"
-              style={{
-                width: idx === i ? 40 : 16,
-                background: idx === i ? '#c6a46a' : '#33291b',
-              }}
+              style={{ width: idx === i ? 40 : 16, background: idx === i ? '#9b7b4f' : '#cdbfa8' }}
             />
           ))}
         </div>

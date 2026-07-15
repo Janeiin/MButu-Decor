@@ -1,141 +1,113 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import GrassCanvas from '@/components/ui/GrassCanvas';
+import SmartImage from '@/components/ui/SmartImage';
 import Magnetic from '@/components/ui/Magnetic';
-
-const line1 = ['Crafted', 'by', 'Nature.'];
-const line2 = ['Refined', 'for', 'Design.'];
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 1.9 } },
-};
-const word = {
-  hidden: { opacity: 0, y: '110%' },
-  show: {
-    opacity: 1,
-    y: '0%',
-    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+import { media } from '@/lib/site';
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '28%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
     <section
       id="top"
       ref={ref}
-      className="relative flex h-[100svh] min-h-[640px] w-full items-center overflow-hidden"
+      className="relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-espresso"
     >
-      <motion.div style={{ scale }} className="absolute inset-0">
-        <GrassCanvas />
+      {/* Full-screen image with a long, slow zoom out */}
+      <motion.div
+        style={{ y }}
+        initial={reduce ? undefined : { scale: 1.12 }}
+        animate={reduce ? undefined : { scale: 1 }}
+        transition={{ duration: 16, ease: 'easeOut' }}
+        className="absolute inset-0"
+      >
+        <SmartImage
+          src={media.hero}
+          alt="A rare Hartmann Zebra hide styled in a refined interior"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
       </motion.div>
 
-      {/* Legibility gradients */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/70" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(10,9,8,0.65)_100%)]" />
+      {/* Editorial darkening for legibility */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/25 to-espresso/40" />
 
-      <motion.div style={{ y, opacity }} className="shell relative">
+      <motion.div style={{ y: textY, opacity }} className="shell relative z-10 pb-24 sm:pb-28">
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 1.7 }}
-          className="eyebrow mb-8"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.6 }}
+          className="eyebrow-light mb-7"
         >
-          Ethically Sourced African Leather
+          Ethically Sourced · CITES Compliant
         </motion.p>
 
         <motion.h1
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="max-w-4xl font-display text-[13vw] font-light leading-[0.94] tracking-tight text-ivory sm:text-7xl lg:text-8xl"
+          initial={{ opacity: 0, y: 26 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.3, delay: 1.75, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl font-display text-[15vw] font-normal leading-[0.98] text-ivory sm:text-7xl lg:text-8xl"
         >
-          <span className="block overflow-hidden">
-            {line1.map((wd, i) => (
-              <motion.span key={i} variants={word} className="mr-[0.25em] inline-block">
-                {wd}
-              </motion.span>
-            ))}
-          </span>
-          <span className="block overflow-hidden">
-            {line2.map((wd, i) => (
-              <motion.span
-                key={i}
-                variants={word}
-                className={`mr-[0.25em] inline-block italic ${
-                  wd === 'Design.' ? 'text-lux' : 'text-ivory/90'
-                }`}
-              >
-                {wd}
-              </motion.span>
-            ))}
-          </span>
+          Rare African
+          <br />
+          <span className="italic text-clay-gold">Luxury Hides</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2.5 }}
-          className="mt-9 max-w-md font-body text-base font-light leading-relaxed text-ivory-dim"
+          transition={{ duration: 1, delay: 2.05 }}
+          className="mt-8 max-w-xl font-body text-lg font-light leading-relaxed text-ivory/80"
         >
-          A trade-only house of rare hides, curated for the world&rsquo;s most
-          considered interiors.
+          Ethically sourced Hartmann Zebra hides for exceptional interiors,
+          bespoke furniture and luxury hospitality.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2.8 }}
-          className="mt-11 flex flex-wrap items-center gap-6"
+          transition={{ duration: 1, delay: 2.3 }}
+          className="mt-11 flex flex-wrap items-center gap-5"
         >
           <Magnetic>
-            <a
-              href="#products"
-              className="group inline-flex items-center gap-3 rounded-full bg-ivory px-8 py-4 font-body text-[13px] uppercase tracking-widest text-ink transition-colors duration-500 hover:bg-gold-bright"
-            >
-              View the Collection
-              <span className="transition-transform duration-500 group-hover:translate-x-1">
-                &rarr;
-              </span>
+            <a href="#materials" className="btn-light group">
+              Explore the Collection
+              <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
             </a>
           </Magnetic>
           <a
-            href="#about"
-            className="font-body text-[13px] uppercase tracking-widest text-ivory-dim transition-colors hover:text-ivory"
+            href="#contact"
+            className="font-body text-[12px] font-medium uppercase tracking-wide2 text-ivory/70 transition-colors hover:text-ivory"
           >
-            Our Story
+            Request Catalogue
           </a>
         </motion.div>
       </motion.div>
 
-      {/* Scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 2.8, duration: 1 }}
+        className="absolute bottom-8 right-8 hidden items-center gap-3 sm:flex"
       >
-        <div className="flex flex-col items-center gap-3">
-          <span className="font-body text-[10px] uppercase tracking-label text-ivory-faint">
-            Scroll
-          </span>
-          <motion.span
-            animate={{ height: [10, 26, 10], opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-px bg-gold"
-          />
-        </div>
+        <span className="font-body text-[10px] uppercase tracking-label text-ivory/50">Scroll</span>
+        <motion.span
+          animate={{ height: [10, 26, 10], opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px bg-clay-gold"
+        />
       </motion.div>
     </section>
   );

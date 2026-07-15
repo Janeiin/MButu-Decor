@@ -17,31 +17,29 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-charcoal-line bg-ink pt-24">
+    <footer className="relative bg-espresso pt-24 text-ivorytext">
       <div className="shell">
-        <ZebraDivider className="mb-20" />
+        <ZebraDivider tone="ivory" className="mb-20" />
 
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <a
-              href="#top"
-              className="font-display text-3xl font-light tracking-widest text-ivory"
-            >
-              M<span className="text-gold">&rsquo;</span>BUTU
+            <a href="#top" className="font-display text-4xl font-normal">
+              M<span className="text-clay-gold">&rsquo;</span>Butu
             </a>
-            <p className="mt-6 max-w-xs font-body text-sm font-light leading-relaxed text-ivory-dim">
-              {site.tagline}
+            <p className="mt-6 max-w-xs font-body text-sm font-light leading-relaxed text-ivorytext/60">
+              {site.tagline}. Ethically sourced in {site.contact.sourced}, curated in{' '}
+              {site.contact.location}.
             </p>
           </div>
 
           <div className="lg:col-span-3">
-            <p className="eyebrow mb-6">Navigate</p>
+            <p className="eyebrow-light mb-6">Navigate</p>
             <ul className="space-y-3">
               {site.nav.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="font-body text-sm font-light text-ivory-dim transition-colors hover:text-ivory"
+                    className="font-body text-sm font-light text-ivorytext/60 transition-colors hover:text-ivorytext"
                   >
                     {item.label}
                   </a>
@@ -51,28 +49,23 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-6">The Dispatch</p>
-            <p className="mb-5 max-w-xs font-body text-sm font-light leading-relaxed text-ivory-dim">
-              Occasional word on new arrivals and rare pieces. Nothing more.
+            <p className="eyebrow-light mb-6">The Dispatch</p>
+            <p className="mb-5 max-w-xs font-body text-sm font-light leading-relaxed text-ivorytext/60">
+              Occasional word on rare arrivals. Nothing more.
             </p>
             {subscribed ? (
-              <p className="font-body text-sm text-gold-bright">
-                You are on the list. Thank you.
-              </p>
+              <p className="font-body text-sm text-clay-gold">You are on the list. Thank you.</p>
             ) : (
-              <form onSubmit={subscribe} className="flex items-center gap-3 border-b border-charcoal-line pb-3 focus-within:border-gold">
+              <form className="flex items-center gap-3 border-b border-espresso-line pb-3 focus-within:border-clay-gold" onSubmit={subscribe}>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="w-full bg-transparent font-body text-sm font-light text-ivory placeholder:text-ivory-faint/60 focus:outline-none"
+                  className="w-full bg-transparent font-body text-sm font-light text-ivorytext placeholder:text-ivorytext/35 focus:outline-none"
                 />
-                <button
-                  type="submit"
-                  className="shrink-0 font-body text-[12px] uppercase tracking-widest text-gold-bright"
-                >
+                <button type="submit" className="shrink-0 font-body text-[11px] font-medium uppercase tracking-wide2 text-clay-gold">
                   Join
                 </button>
               </form>
@@ -80,8 +73,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-charcoal-line py-8 sm:flex-row">
-          <p className="font-body text-xs text-ivory-faint">
+        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-espresso-line py-8 sm:flex-row">
+          <p className="font-body text-xs text-ivorytext/45">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
@@ -91,7 +84,7 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-[11px] uppercase tracking-widest text-ivory-faint transition-colors hover:text-gold-bright"
+                className="font-body text-[11px] font-medium uppercase tracking-wide2 text-ivorytext/45 transition-colors hover:text-clay-gold"
               >
                 {s.label}
               </a>
@@ -99,7 +92,7 @@ export default function Footer() {
           </div>
           <a
             href="#top"
-            className="font-body text-[11px] uppercase tracking-widest text-ivory-faint transition-colors hover:text-ivory"
+            className="font-body text-[11px] font-medium uppercase tracking-wide2 text-ivorytext/45 transition-colors hover:text-ivorytext"
           >
             Back to top &uarr;
           </a>

@@ -1,40 +1,44 @@
 import Preloader from '@/components/layout/Preloader';
 import Navbar from '@/components/layout/Navbar';
 import ScrollProgress from '@/components/layout/ScrollProgress';
-import CursorGlow from '@/components/layout/CursorGlow';
-import AmbientSound from '@/components/layout/AmbientSound';
 import Footer from '@/components/layout/Footer';
 
 import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Products from '@/components/sections/Products';
-import WhyDesigners from '@/components/sections/WhyDesigners';
+import Ethos from '@/components/sections/Ethos';
+import Story from '@/components/sections/Story';
+import WhyHartmann from '@/components/sections/WhyHartmann';
+import Materials from '@/components/sections/Materials';
+import Applications from '@/components/sections/Applications';
 import Gallery from '@/components/sections/Gallery';
-import Process from '@/components/sections/Process';
+import Trust from '@/components/sections/Trust';
+import Commercial from '@/components/sections/Commercial';
 import Testimonials from '@/components/sections/Testimonials';
 import Contact from '@/components/sections/Contact';
+import Closing from '@/components/sections/Closing';
 
 export default function Home() {
   return (
     <>
       <Preloader />
       <ScrollProgress />
-      <CursorGlow />
       <Navbar />
 
       <main>
         <Hero />
-        <About />
-        <Products />
-        <WhyDesigners />
+        <Ethos />
+        <Story />
+        <WhyHartmann />
+        <Materials />
+        <Applications />
         <Gallery />
-        <Process />
+        <Trust />
+        <Commercial />
         <Testimonials />
         <Contact />
+        <Closing />
       </main>
 
       <Footer />
-      <AmbientSound />
     </>
   );
 }

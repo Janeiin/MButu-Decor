@@ -1,8 +1,9 @@
-# M'Butu
+# M'Butu Collection
 
-A cinematic, single-page site for **M'Butu**, a trade-only house of ethically
-sourced African leather. Built for luxury interior designers, architects and
-five-star lodges. Dark, quiet, expensive.
+A warm, editorial single-page site for **M'Butu Collection**, a trade-only house
+of rare, ethically sourced African hides. Designed in the register of luxury
+interior and furniture houses (Aman, Minotti, Poliform): calm, spacious, and
+photography led.
 
 Next.js 15 (App Router) · TypeScript · Tailwind CSS · Framer Motion.
 
@@ -23,8 +24,8 @@ npm run start   # serve the production build
 npm run lint    # eslint
 ```
 
-The project builds fully static with zero external calls. Fonts are
-self-hosted, so nothing depends on Google Fonts at build or runtime.
+The site builds fully static with zero external calls. Fonts are self-hosted,
+so nothing depends on Google Fonts at build or runtime.
 
 ---
 
@@ -34,65 +35,68 @@ self-hosted, so nothing depends on Google Fonts at build or runtime.
 2. Go to [vercel.com/new](https://vercel.com/new) and import the repo.
 3. Vercel auto-detects Next.js. No settings to change. Click **Deploy**.
 
-That is the whole process. There are no environment variables to set for the
-site to run.
+There are no environment variables required for the site to run.
+
+---
+
+## Design system
+
+- **Palette** (in `tailwind.config.ts` and `src/app/globals.css`): warm `ivory`
+  page ground, `sand` alternate panels, `charcoal` text, `taupe` for muted copy
+  and labels, `espresso` for dark editorial sections, and a restrained `clay`
+  bronze accent (`#9B7B4F`, with `#C6A46A` on dark).
+- **Type**: Cormorant Garamond (editorial display serif) paired with Manrope
+  (clean sans for body and interface). Both self-hosted in `src/fonts`.
+- **Motion**: fade-up reveals, gentle image parallax, slow hero zoom, soft hover
+  states. `prefers-reduced-motion` is respected everywhere.
+
+Sections flow through alternating ivory, sand and espresso grounds for editorial
+rhythm: Hero, Ethos marquee, The House, Why Hartmann, Materials, Applications,
+Gallery, Trust, For the Trade, Testimonials, Contact, and a full-bleed Closing.
 
 ---
 
 ## Making it yours
 
-Almost everything lives in one file: **`src/lib/site.ts`**.
+Almost everything lives in **`src/lib/site.ts`**.
 
 | What you want to change | Where |
 | --- | --- |
-| Company name, tagline, contact details, socials | `site` object |
-| Navigation links | `site.nav` |
-| Product cards (Zebra, Cow, Springbok, etc.) | `products` |
-| "Why designers choose us" reasons and stats | `reasons` |
-| Process timeline steps | `processSteps` |
+| Name, tagline, contact, socials | `site` |
+| Navigation | `site.nav` |
+| Marquee values (Rare, Authentic, ...) | `ethos` |
+| Scarcity lines used throughout | `scarcity` |
+| Why Hartmann Zebra points | `whyHartmann` |
+| Materials (Hartmann, Burchell, Springbok, ...) | `materials` |
+| Applications / spaces | `applications` |
+| Gallery sections (Living Spaces, ...) | `gallery` |
+| Trust chips | `trust` |
+| Trade cards | `commercial` |
 | Testimonials | `testimonials` |
-| All photography | `media` object |
+| Feature imagery (hero, story, closing) | `media` |
 
 ### Photography
 
-Every image is referenced through the `media` map (and each product's
-`image`). The defaults are royalty-free Unsplash placeholders. To use your own
-art direction, drop files into `public/images` and point to them:
+Every image resolves through the `media` map and each item's `image`. The
+current values are royalty-free Unsplash placeholders. To use your own art
+direction, drop files into `public/images` and point to them:
 
 ```ts
-about: '/images/your-photo.jpg',
+hero: '/images/your-hero.jpg',
 ```
 
-Any resolution works. `next/image` handles sizing and optimisation, and if a
-remote placeholder ever fails to load the frame falls back to a charcoal
-gradient so the layout never breaks.
-
-If you add images from a new remote host, allow it in `next.config.mjs` under
+`next/image` handles sizing and optimisation. If a placeholder ever fails to
+load, the frame falls back to a warm sand gradient so the layout never breaks.
+To add a new remote host, list it in `next.config.mjs` under
 `images.remotePatterns`.
 
-### Ambient sound
+### Calls to action and forms
 
-`public/audio/ambience.mp3` is a soft looping placeholder (wind through grass).
-It is muted by default and only plays when a visitor taps the **Ambience**
-toggle in the lower-left corner. Replace that one file with your own loop, same
-name and path. See `public/audio/README.md`.
+The enquiry form and newsletter show success states but have no backend by
+default. Wire them to your provider (a Route Handler, Formspree, or Resend) in:
 
-### Colour and type
-
-- Palette tokens: `tailwind.config.ts` (`ink`, `charcoal`, `bronze`, `gold`,
-  `ivory`) and the CSS variables in `src/app/globals.css`.
-- Brand accent gold is `#C6A46A`.
-- Fonts are Fraunces (display) and Jost (body), self-hosted in `src/fonts`.
-
-### Contact form and newsletter
-
-Both are wired to a success state but have no backend by default. Connect them
-to your provider of choice inside the submit handlers:
-
-- Enquiry form: `src/components/sections/Contact.tsx`
-- Newsletter: `src/components/layout/Footer.tsx`
-
-Good options: a Next.js Route Handler, Formspree, or Resend.
+- `src/components/sections/Contact.tsx`
+- `src/components/layout/Footer.tsx`
 
 ---
 
@@ -102,36 +106,21 @@ Good options: a Next.js Route Handler, Formspree, or Resend.
 src/
 ├── app/
 │   ├── layout.tsx          # fonts, metadata, SEO
-│   ├── page.tsx            # section assembly
-│   ├── globals.css         # palette, grain, base type
-│   ├── icon.svg            # favicon
-│   ├── robots.ts
-│   └── sitemap.ts
+│   ├── page.tsx            # section order
+│   ├── globals.css         # palette, base type, buttons, grain
+│   ├── icon.svg · robots.ts · sitemap.ts
 ├── components/
-│   ├── layout/             # Navbar, Footer, Preloader, CursorGlow,
-│   │                       # ScrollProgress, AmbientSound
-│   ├── sections/           # Hero, About, Products, WhyDesigners,
-│   │                       # Gallery, Process, Testimonials, Contact
-│   └── ui/                 # Reveal, Magnetic, SmartImage, ZebraDivider,
-│                           # GrassCanvas, SectionHeading
-├── fonts/                  # self-hosted Fraunces + Jost
-└── lib/
-    └── site.ts             # single source of truth for content
+│   ├── layout/             # Navbar, Footer, Preloader, ScrollProgress
+│   ├── sections/           # Hero, Ethos, Story, WhyHartmann, Materials,
+│   │                       # Applications, Gallery, Trust, Commercial,
+│   │                       # Testimonials, Contact, Closing
+│   └── ui/                 # Reveal, Magnetic, ParallaxImage, SmartImage,
+│                           # SectionHeading, ZebraDivider
+├── fonts/                  # self-hosted Cormorant Garamond + Manrope
+└── lib/site.ts             # single source of truth for content
 ```
 
 ---
 
-## The details
-
-- **Hero** renders on a single canvas: swaying grass silhouettes, drifting dust
-  motes and a warm sunrise light that breathes across the frame.
-- **Zebra-stripe divider** is the house signature, drawn in on scroll.
-- Preloader, magnetic buttons, cursor glow, scroll progress, parallax, fade
-  reveals and hover states throughout.
-- Fully responsive, keyboard-focus visible, and `prefers-reduced-motion` is
-  respected everywhere (animations resolve to a single composed frame).
-
----
-
-© M'Butu. Placeholder imagery from Unsplash is for demonstration only; replace
-before production use.
+© M'Butu Collection. Placeholder imagery from Unsplash is for demonstration
+only; replace before production use.
